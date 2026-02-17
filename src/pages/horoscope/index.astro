@@ -1,0 +1,53 @@
+---
+import Base from '../../layouts/Base.astro';
+import { zodiacSigns } from '../../data/zodiac.js';
+const elements = { Fire: '🔥', Earth: '🌍', Air: '💨', Water: '🌊' };
+---
+
+<Base title="All Zodiac Signs — Celestial Tarot" description="Explore tarot readings and horoscope insights for all 12 zodiac signs.">
+  <section class="hero-sm">
+    <div class="container">
+      <h1>Zodiac Horoscopes</h1>
+      <p>Select your sign for this week's cosmic guidance and tarot reading.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="signs-grid">
+        {zodiacSigns.map(sign => (
+          <a href={`/horoscope/${sign.slug}/`} class="sign-card">
+            <div class="sign-symbol">{sign.symbol}</div>
+            <h2 class="sign-name">{sign.name}</h2>
+            <div class="sign-meta">{sign.dates} · {elements[sign.element]} {sign.element}</div>
+            <p class="sign-desc">{sign.description}</p>
+            {sign.hasVideo && <span class="sign-badge">New Reading ✦</span>}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero-sm { text-align: center; padding: 5rem 0 2rem; }
+  .hero-sm h1 { font-size: 2.5rem; color: var(--color-primary); margin-bottom: 0.5rem; }
+  .hero-sm p { color: var(--color-text-muted); }
+  .section { padding: 3rem 0; }
+  .signs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+  .sign-card {
+    position: relative; padding: 2rem; background: var(--color-surface);
+    border: 1px solid var(--color-border); border-radius: 12px;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .sign-card:hover { transform: translateY(-4px); border-color: var(--color-accent); }
+  .sign-symbol { font-size: 2.5rem; margin-bottom: 0.5rem; }
+  .sign-name { font-size: 1.5rem; color: var(--color-text); margin-bottom: 0.25rem; }
+  .sign-meta { font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 0.75rem; }
+  .sign-desc { font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.5; }
+  .sign-badge {
+    position: absolute; top: 1rem; right: 1rem;
+    background: var(--color-accent); color: #0a0a1a;
+    padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+  }
+</style>

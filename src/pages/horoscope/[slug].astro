@@ -1,0 +1,113 @@
+---
+import Base from '../../layouts/Base.astro';
+import { zodiacSigns } from '../../data/zodiac.js';
+
+export function getStaticPaths() {
+  return zodiacSigns.map(sign => ({
+    params: { slug: sign.slug },
+    props: { sign },
+  }));
+}
+
+const { sign } = Astro.props;
+---
+
+<Base title={`${sign.name} — Weekly Tarot Reading | Celestial Tarot`} description={`${sign.name} (${sign.dates}) — ${sign.description} Get your weekly tarot reading.`}>
+  <section class="sign-hero">
+    <div class="container">
+      <div class="sign-symbol">{sign.symbol}</div>
+      <h1>{sign.name}</h1>
+      <p class="sign-dates">{sign.dates} · {sign.element}</p>
+      <p class="sign-desc">{sign.description}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content">
+      {sign.hasVideo ? (
+        <div class="reading">
+          <h2>This Week's Reading</h2>
+          <div class="video-placeholder">
+            <div class="play-icon">▶</div>
+            <p>Video reading available — check our <a href="https://www.youtube.com/@CelestialTarot" target="_blank" rel="noopener">YouTube channel</a></p>
+          </div>
+          <div class="caption">
+            {sign.videoCaption?.split('\n').map(line => (
+              <p>{line}</p>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div class="coming-soon">
+          <h2>Reading Coming Soon</h2>
+          <p>We're preparing your {sign.name} cosmic reading. Subscribe to be notified!</p>
+          <form class="newsletter-form" action="#" method="POST">
+            <input type="email" placeholder="your@email.com" required class="newsletter-input" />
+            <button type="submit" class="btn">Notify Me ✦</button>
+          </form>
+        </div>
+      )}
+
+      <div class="other-signs">
+        <h3>Explore Other Signs</h3>
+        <div class="signs-row">
+          {zodiacSigns.filter(s => s.slug !== sign.slug).slice(0, 4).map(s => (
+            <a href={`/horoscope/${s.slug}/`} class="mini-card">
+              <span class="mini-symbol">{s.symbol}</span>
+              <span>{s.name}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .sign-hero {
+    text-align: center; padding: 6rem 0 3rem;
+    background: radial-gradient(ellipse at center, #1a1a3a 0%, var(--color-bg) 70%);
+  }
+  .sign-symbol { font-size: 4rem; margin-bottom: 0.5rem; }
+  .sign-hero h1 { font-size: 3rem; color: var(--color-primary); }
+  .sign-dates { color: var(--color-accent); font-size: 1.1rem; margin-bottom: 0.5rem; }
+  .sign-desc { color: var(--color-text-muted); max-width: 500px; margin: 0 auto; }
+  .section { padding: 3rem 0; }
+  .content { max-width: 700px; margin: 0 auto; }
+  .reading h2, .coming-soon h2 { color: var(--color-primary); margin-bottom: 1.5rem; text-align: center; }
+  .video-placeholder {
+    background: var(--color-surface); border: 1px solid var(--color-border);
+    border-radius: 12px; padding: 3rem; text-align: center; margin-bottom: 2rem;
+  }
+  .play-icon { font-size: 3rem; margin-bottom: 1rem; }
+  .video-placeholder p { color: var(--color-text-muted); }
+  .caption { line-height: 1.8; }
+  .caption p { margin-bottom: 0.75rem; color: var(--color-text); }
+  .coming-soon { text-align: center; padding: 3rem 0; }
+  .coming-soon p { color: var(--color-text-muted); margin-bottom: 2rem; }
+  .newsletter-form { display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; }
+  .newsletter-input {
+    padding: 0.75rem 1.25rem; border-radius: 50px;
+    border: 1px solid var(--color-border); background: var(--color-surface);
+    color: var(--color-text); font-size: 0.95rem; min-width: 240px; outline: none;
+  }
+  .newsletter-input:focus { border-color: var(--color-accent); }
+  .btn {
+    display: inline-block; padding: 0.75rem 2rem;
+    background: linear-gradient(135deg, var(--color-accent), #b8943e);
+    color: #0a0a1a; font-weight: 600; border-radius: 50px;
+    font-size: 0.95rem; border: none; cursor: pointer;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(201,169,110,0.3); }
+  .other-signs { margin-top: 4rem; }
+  .other-signs h3 { color: var(--color-primary); text-align: center; margin-bottom: 1.5rem; }
+  .signs-row { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+  .mini-card {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.75rem 1.25rem; background: var(--color-surface);
+    border: 1px solid var(--color-border); border-radius: 8px;
+    color: var(--color-text); font-size: 0.9rem;
+  }
+  .mini-card:hover { border-color: var(--color-accent); }
+  .mini-symbol { font-size: 1.3rem; }
+</style>

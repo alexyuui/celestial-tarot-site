@@ -1,0 +1,41 @@
+---
+const { title = 'Celestial Tarot', description = 'Weekly zodiac readings and tarot guidance for every sign.' } = Astro.props;
+import '../styles/global.css';
+const base = import.meta.env.BASE_URL;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="icon" href={`${base}favicon.svg`} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <nav class="nav">
+    <a href={base} class="nav-brand">✨ Celestial Tarot</a>
+    <div class="nav-links">
+      <a href={base}>Home</a>
+      <a href={`${base}zodiac/`}>Zodiac</a>
+      <a href={`${base}about/`}>About</a>
+      <a href={`${base}contact/`}>Contact</a>
+    </div>
+  </nav>
+  <main>
+    <slot />
+  </main>
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="social-links">
+        <a href="https://youtube.com/@CelestialTarot" target="_blank">YouTube</a>
+        <a href="https://twitter.com/Celestia1Tarot" target="_blank">Twitter</a>
+        <a href="https://tiktok.com/@celestialtarot" target="_blank">TikTok</a>
+      </div>
+      <p>&copy; 2026 Celestial Tarot. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

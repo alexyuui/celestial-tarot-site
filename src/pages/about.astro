@@ -1,38 +1,52 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import Base from '../layouts/Base.astro';
 ---
-<BaseLayout title="About — Celestial Tarot">
-  <section class="page-header">
-    <div class="container">
-      <h1>About Celestial Tarot</h1>
+
+<Base title="About — Celestial Tarot" description="Learn about Celestial Tarot — your weekly cosmic guide for tarot readings and horoscope insights.">
+  <section class="hero-sm">
+    <div class="container"><h1>About Celestial Tarot</h1></div>
+  </section>
+
+  <section class="section">
+    <div class="container content">
+      <p><strong>Celestial Tarot</strong> is your weekly cosmic companion — blending the ancient wisdom of tarot with modern astrological insights to help you navigate life's journey with clarity and confidence.</p>
+
+      <h2>Our Mission</h2>
+      <p>We believe everyone deserves cosmic guidance that's accessible, empowering, and beautifully presented. Each week, we deliver tarot readings tailored to every zodiac sign — helping you understand the energies at play and make aligned decisions.</p>
+
+      <h2>What We Offer</h2>
+      <ul>
+        <li><strong>Weekly Tarot Readings</strong> — Personalized cosmic guidance for all 12 signs</li>
+        <li><strong>Video Content</strong> — Engaging visual readings on YouTube, TikTok, and more</li>
+        <li><strong>Cosmic Insights</strong> — Transit breakdowns, planetary alignments, and what they mean for you</li>
+      </ul>
+
+      <h2>Connect With Us</h2>
+      <div class="social-links">
+        <a href="https://www.youtube.com/@CelestialTarot" target="_blank" rel="noopener" class="social-link">📺 YouTube</a>
+        <a href="https://twitter.com/Celestia1Tarot" target="_blank" rel="noopener" class="social-link">🐦 Twitter</a>
+        <a href="https://www.tiktok.com/@celestialtarot" target="_blank" rel="noopener" class="social-link">🎵 TikTok</a>
+      </div>
     </div>
   </section>
-  <section class="container content">
-    <h2>Our Story</h2>
-    <p>Celestial Tarot was born from a deep passion for astrology, tarot, and the cosmic forces that shape our lives. We believe that the stars hold wisdom for everyone — and our mission is to make that wisdom accessible, engaging, and beautifully presented.</p>
-
-    <h2>What We Do</h2>
-    <p>Through our YouTube channel, social media presence, and this website, we offer:</p>
-    <ul>
-      <li><strong>Zodiac Readings</strong> — In-depth video readings for each sign</li>
-      <li><strong>Tarot Insights</strong> — Card interpretations and guidance</li>
-      <li><strong>Cosmic Guidance</strong> — Seasonal forecasts and lunar wisdom</li>
-      <li><strong>Community</strong> — A space for fellow stargazers to connect</li>
-    </ul>
-
-    <h2>Our Mission</h2>
-    <p>To illuminate your path through the cosmos with clarity, compassion, and a touch of celestial magic. Whether you're a seasoned astrology enthusiast or just beginning your cosmic journey, Celestial Tarot is here to guide you.</p>
-
-    <h2>Connect</h2>
-    <p>Follow us on <a href="https://youtube.com/@Celestia1Tarot">YouTube</a>, <a href="https://twitter.com/Celestia1Tarot">Twitter</a>, and <a href="https://tiktok.com/@Celestia1Tarot">TikTok</a> for daily cosmic insights.</p>
-  </section>
-</BaseLayout>
+</Base>
 
 <style>
-  .page-header { text-align: center; padding: 6rem 0 3rem; }
-  .content { max-width: 700px; padding-bottom: 2rem; }
-  .content h2 { margin: 2rem 0 1rem; font-size: 1.5rem; }
-  .content p { color: var(--text-muted); margin-bottom: 1rem; line-height: 1.8; }
-  .content ul { color: var(--text-muted); margin: 0 0 1rem 1.5rem; }
-  .content li { margin-bottom: 0.5rem; }
+  .hero-sm { text-align: center; padding: 5rem 0 2rem; }
+  .hero-sm h1 { font-size: 2.5rem; color: var(--color-primary); }
+  .section { padding: 3rem 0; }
+  .content { max-width: 650px; margin: 0 auto; }
+  .content p { margin-bottom: 1.5rem; color: var(--color-text-muted); line-height: 1.8; }
+  .content strong { color: var(--color-text); }
+  .content h2 { color: var(--color-primary); font-size: 1.5rem; margin: 2.5rem 0 1rem; }
+  .content ul { list-style: none; margin-bottom: 1.5rem; }
+  .content li { padding: 0.5rem 0; color: var(--color-text-muted); padding-left: 1.5rem; position: relative; }
+  .content li::before { content: '✦'; position: absolute; left: 0; color: var(--color-accent); }
+  .social-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .social-link {
+    padding: 0.75rem 1.5rem; background: var(--color-surface);
+    border: 1px solid var(--color-border); border-radius: 8px;
+    color: var(--color-text); font-size: 0.95rem;
+  }
+  .social-link:hover { border-color: var(--color-accent); color: var(--color-accent); }
 </style>

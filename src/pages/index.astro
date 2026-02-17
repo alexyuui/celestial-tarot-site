@@ -1,205 +1,122 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { signs } from '../data/zodiac';
-const base = import.meta.env.BASE_URL;
+import Base from '../layouts/Base.astro';
+import { zodiacSigns } from '../data/zodiac.js';
 ---
-<BaseLayout>
-  <!-- Hero -->
+
+<Base title="Celestial Tarot — Your Weekly Cosmic Guide">
   <section class="hero">
-    <div class="container hero-inner">
-      <h1>Celestial Tarot</h1>
-      <p class="tagline">Unlock the Mysteries of the Stars</p>
-      <p class="subtitle">Zodiac readings, tarot insights, and cosmic guidance for your journey through the stars.</p>
-      <a href={`${base}zodiac/`} class="cta-btn">Explore Your Sign ✦</a>
+    <div class="hero-stars"></div>
+    <div class="container hero-content">
+      <h1 class="hero-title">Celestial Tarot</h1>
+      <p class="hero-tagline">Your Weekly Cosmic Guide</p>
+      <p class="hero-desc">Tarot readings and horoscope insights for every zodiac sign. Discover what the stars have in store for you.</p>
+      <a href="/horoscope/" class="btn">Explore Your Sign ✦</a>
     </div>
   </section>
 
-  <!-- Latest Video -->
   <section class="section">
     <div class="container">
-      <h2 class="section-title">✦ Latest Reading</h2>
-      <div class="video-wrapper">
-        <div class="video-placeholder">
-          <p>🎬 Latest YouTube video coming soon!</p>
-          <a href="https://youtube.com/@Celestia1Tarot" target="_blank" class="cta-btn">Visit Our YouTube Channel →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Zodiac Grid -->
-  <section class="section">
-    <div class="container">
-      <h2 class="section-title">✦ The Zodiac</h2>
+      <h2 class="section-title">Choose Your Sign</h2>
       <div class="zodiac-grid">
-        {signs.map(sign => (
-          <a href={`${base}zodiac/${sign.slug}/`} class="zodiac-card">
+        {zodiacSigns.map(sign => (
+          <a href={`/horoscope/${sign.slug}/`} class="zodiac-card">
             <span class="zodiac-symbol">{sign.symbol}</span>
-            <h3>{sign.name}</h3>
-            <p class="zodiac-dates">{sign.dates}</p>
+            <span class="zodiac-name">{sign.name}</span>
+            <span class="zodiac-dates">{sign.dates}</span>
           </a>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- About -->
   <section class="section">
-    <div class="container text-center">
-      <h2 class="section-title">✦ About Celestial Tarot</h2>
-      <p class="about-text">We are a cosmic collective dedicated to bringing you insightful zodiac readings, tarot guidance, and astrological wisdom. Through our videos and written content, we help you navigate life's journey with the stars as your guide.</p>
-    </div>
-  </section>
-
-  <!-- Social -->
-  <section class="section">
-    <div class="container text-center">
-      <h2 class="section-title">✦ Connect With Us</h2>
-      <div class="social-links">
-        <a href="https://youtube.com/@Celestia1Tarot" target="_blank" class="social-btn">▶ YouTube</a>
-        <a href="https://twitter.com/Celestia1Tarot" target="_blank" class="social-btn">𝕏 Twitter</a>
-        <a href="https://tiktok.com/@Celestia1Tarot" target="_blank" class="social-btn">♪ TikTok</a>
+    <div class="container">
+      <h2 class="section-title">Latest Reading</h2>
+      <div class="featured-video">
+        <div class="video-placeholder">
+          <div class="video-icon">▶</div>
+          <p>Aries — Saturn &amp; Neptune Enter Your Sign</p>
+          <a href="/horoscope/aries/" class="btn btn-sm">Watch Reading →</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Newsletter -->
-  <section class="section newsletter">
-    <div class="container text-center">
-      <h2 class="section-title">✦ Get Your Weekly Cosmic Reading</h2>
-      <p>Subscribe to receive personalized zodiac insights straight to your inbox.</p>
-      <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing! ✦')">
-        <input type="email" placeholder="Enter your email" required />
-        <button type="submit" class="cta-btn">Subscribe ✦</button>
+  <section class="section newsletter-section">
+    <div class="container">
+      <h2 class="section-title">Stay Aligned with the Stars</h2>
+      <p class="newsletter-desc">Get your free weekly cosmic reading delivered to your inbox.</p>
+      <form class="newsletter-form" action="#" method="POST">
+        <input type="email" placeholder="your@email.com" required class="newsletter-input" />
+        <button type="submit" class="btn">Subscribe ✦</button>
       </form>
     </div>
   </section>
-</BaseLayout>
+</Base>
 
 <style>
   .hero {
-    text-align: center;
-    padding: 8rem 0 5rem;
-    background: radial-gradient(ellipse at center, rgba(26,26,62,0.6) 0%, transparent 70%);
+    position: relative; text-align: center; padding: 8rem 0 6rem; overflow: hidden;
+    background: radial-gradient(ellipse at center top, #1a1a3a 0%, var(--color-bg) 70%);
   }
-  .hero h1 {
-    font-size: 4rem;
-    color: var(--accent);
-    margin-bottom: 0.5rem;
+  .hero-stars {
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 40% 70%, rgba(255,255,255,0.3), transparent),
+      radial-gradient(1.5px 1.5px at 60% 20%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1px 1px at 80% 50%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(1.5px 1.5px at 10% 80%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 70% 90%, rgba(255,255,255,0.3), transparent),
+      radial-gradient(2px 2px at 90% 15%, rgba(216,236,240,0.6), transparent);
+    background-size: 200px 200px;
+    animation: twinkle 8s ease-in-out infinite alternate;
   }
-  .tagline {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    color: var(--gold);
-    margin-bottom: 1rem;
-  }
-  .subtitle {
-    color: var(--text-muted);
-    max-width: 600px;
-    margin: 0 auto 2rem;
-  }
-  .cta-btn {
-    display: inline-block;
-    background: linear-gradient(135deg, var(--bg-secondary), #2a2a6e);
-    color: var(--accent);
-    padding: 0.8rem 2rem;
-    border-radius: 50px;
-    border: 1px solid var(--accent);
-    font-size: 1rem;
-    cursor: pointer;
-    font-family: inherit;
-    transition: all 0.3s;
-  }
-  .cta-btn:hover {
-    background: var(--accent);
-    color: var(--bg-primary);
-    opacity: 1;
-  }
+  @keyframes twinkle { from { opacity: 0.6; } to { opacity: 1; } }
+  .hero-content { position: relative; z-index: 1; }
+  .hero-title { font-size: clamp(2.5rem, 6vw, 4.5rem); color: var(--color-primary); margin-bottom: 0.5rem; }
+  .hero-tagline { font-size: 1.3rem; color: var(--color-accent); margin-bottom: 1rem; font-family: var(--font-heading); }
+  .hero-desc { color: var(--color-text-muted); max-width: 500px; margin: 0 auto 2rem; }
 
-  .section { padding: 4rem 0; }
-  .section-title {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 2rem;
+  .btn {
+    display: inline-block; padding: 0.75rem 2rem;
+    background: linear-gradient(135deg, var(--color-accent), #b8943e);
+    color: #0a0a1a; font-weight: 600; border-radius: 50px;
+    font-size: 0.95rem; border: none; cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
   }
-  .text-center { text-align: center; }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(201,169,110,0.3); color: #0a0a1a; }
+  .btn-sm { padding: 0.5rem 1.5rem; font-size: 0.85rem; }
 
-  .video-wrapper { max-width: 800px; margin: 0 auto; }
-  .video-placeholder {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 4rem 2rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-  }
+  .section { padding: 5rem 0; }
+  .section-title { text-align: center; font-size: 2rem; color: var(--color-primary); margin-bottom: 2.5rem; }
 
-  .zodiac-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 1.5rem;
-  }
+  .zodiac-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; }
   .zodiac-card {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 2rem 1rem;
-    text-align: center;
-    transition: all 0.3s;
+    display: flex; flex-direction: column; align-items: center; padding: 1.5rem 1rem;
+    background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px;
+    transition: transform 0.2s, border-color 0.2s;
   }
-  .zodiac-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-4px);
-    opacity: 1;
-  }
-  .zodiac-symbol { font-size: 2.5rem; display: block; margin-bottom: 0.5rem; }
-  .zodiac-card h3 { font-size: 1.1rem; margin-bottom: 0.3rem; }
-  .zodiac-dates { color: var(--text-muted); font-size: 0.85rem; }
+  .zodiac-card:hover { transform: translateY(-4px); border-color: var(--color-accent); }
+  .zodiac-symbol { font-size: 2.5rem; margin-bottom: 0.5rem; }
+  .zodiac-name { font-family: var(--font-heading); font-size: 1.1rem; color: var(--color-text); }
+  .zodiac-dates { font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.25rem; }
 
-  .about-text {
-    max-width: 700px;
-    margin: 0 auto;
-    color: var(--text-muted);
-    font-size: 1.1rem;
+  .featured-video { max-width: 640px; margin: 0 auto; }
+  .video-placeholder {
+    background: var(--color-surface); border: 1px solid var(--color-border);
+    border-radius: 12px; padding: 3rem; text-align: center;
   }
+  .video-icon { font-size: 3rem; margin-bottom: 1rem; }
+  .video-placeholder p { color: var(--color-text-muted); margin-bottom: 1.5rem; }
 
-  .social-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-  .social-btn {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border);
-    color: var(--accent);
-    padding: 0.8rem 1.5rem;
-    border-radius: 50px;
-    font-size: 0.95rem;
+  .newsletter-section { text-align: center; }
+  .newsletter-desc { color: var(--color-text-muted); margin-bottom: 2rem; }
+  .newsletter-form { display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; }
+  .newsletter-input {
+    padding: 0.75rem 1.25rem; border-radius: 50px;
+    border: 1px solid var(--color-border); background: var(--color-surface);
+    color: var(--color-text); font-size: 0.95rem; min-width: 260px; outline: none;
   }
-  .social-btn:hover { border-color: var(--accent); opacity: 1; }
-
-  .newsletter { background: rgba(26,26,62,0.4); border-radius: 20px; margin: 0 1rem; padding: 4rem 2rem; }
-  .newsletter-form {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 1.5rem;
-    flex-wrap: wrap;
-  }
-  .newsletter-form input {
-    background: var(--bg-primary);
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 0.8rem 1.5rem;
-    border-radius: 50px;
-    font-size: 1rem;
-    width: 300px;
-    font-family: inherit;
-  }
-  .newsletter-form input:focus { outline: none; border-color: var(--accent); }
-
-  @media (max-width: 640px) {
-    .hero h1 { font-size: 2.5rem; }
-    .tagline { font-size: 1.2rem; }
-    .newsletter-form input { width: 100%; }
-  }
+  .newsletter-input:focus { border-color: var(--color-accent); }
 </style>

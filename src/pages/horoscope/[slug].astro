@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { zodiacSigns } from '../../data/zodiac.js';
+const base = import.meta.env.BASE_URL;
 
 export function getStaticPaths() {
   return zodiacSigns.map(sign => ({
@@ -12,7 +13,7 @@ export function getStaticPaths() {
 const { sign } = Astro.props;
 ---
 
-<Base title={`${sign.name} — Weekly Tarot Reading | Celestial Tarot`} description={`${sign.name} (${sign.dates}) — ${sign.description} Get your weekly tarot reading.`}>
+<Base title={`${sign.name} — Weekly Tarot Reading | Celestial Tarot`} description={`${sign.name} (${sign.dates}) — ${sign.description}`}>
   <section class="sign-hero">
     <div class="container">
       <div class="sign-symbol">{sign.symbol}</div>
@@ -32,19 +33,13 @@ const { sign } = Astro.props;
             <p>Video reading available — check our <a href="https://www.youtube.com/@CelestialTarot" target="_blank" rel="noopener">YouTube channel</a></p>
           </div>
           <div class="caption">
-            {sign.videoCaption?.split('\n').map(line => (
-              <p>{line}</p>
-            ))}
+            {sign.videoCaption?.split('\n').map(line => <p>{line}</p>)}
           </div>
         </div>
       ) : (
         <div class="coming-soon">
           <h2>Reading Coming Soon</h2>
           <p>We're preparing your {sign.name} cosmic reading. Subscribe to be notified!</p>
-          <form class="newsletter-form" action="#" method="POST">
-            <input type="email" placeholder="your@email.com" required class="newsletter-input" />
-            <button type="submit" class="btn">Notify Me ✦</button>
-          </form>
         </div>
       )}
 
@@ -52,7 +47,7 @@ const { sign } = Astro.props;
         <h3>Explore Other Signs</h3>
         <div class="signs-row">
           {zodiacSigns.filter(s => s.slug !== sign.slug).slice(0, 4).map(s => (
-            <a href={`/horoscope/${s.slug}/`} class="mini-card">
+            <a href={`${base}horoscope/${s.slug}/`} class="mini-card">
               <span class="mini-symbol">{s.symbol}</span>
               <span>{s.name}</span>
             </a>
@@ -85,20 +80,6 @@ const { sign } = Astro.props;
   .caption p { margin-bottom: 0.75rem; color: var(--color-text); }
   .coming-soon { text-align: center; padding: 3rem 0; }
   .coming-soon p { color: var(--color-text-muted); margin-bottom: 2rem; }
-  .newsletter-form { display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; }
-  .newsletter-input {
-    padding: 0.75rem 1.25rem; border-radius: 50px;
-    border: 1px solid var(--color-border); background: var(--color-surface);
-    color: var(--color-text); font-size: 0.95rem; min-width: 240px; outline: none;
-  }
-  .newsletter-input:focus { border-color: var(--color-accent); }
-  .btn {
-    display: inline-block; padding: 0.75rem 2rem;
-    background: linear-gradient(135deg, var(--color-accent), #b8943e);
-    color: #0a0a1a; font-weight: 600; border-radius: 50px;
-    font-size: 0.95rem; border: none; cursor: pointer;
-  }
-  .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(201,169,110,0.3); }
   .other-signs { margin-top: 4rem; }
   .other-signs h3 { color: var(--color-primary); text-align: center; margin-bottom: 1.5rem; }
   .signs-row { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }

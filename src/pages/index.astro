@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { zodiacSigns } from '../data/zodiac.js';
+const base = import.meta.env.BASE_URL;
 ---
 
 <Base title="Celestial Tarot — Your Weekly Cosmic Guide">
@@ -10,7 +11,7 @@ import { zodiacSigns } from '../data/zodiac.js';
       <h1 class="hero-title">Celestial Tarot</h1>
       <p class="hero-tagline">Your Weekly Cosmic Guide</p>
       <p class="hero-desc">Tarot readings and horoscope insights for every zodiac sign. Discover what the stars have in store for you.</p>
-      <a href="/horoscope/" class="btn">Explore Your Sign ✦</a>
+      <a href={`${base}horoscope/`} class="btn">Explore Your Sign ✦</a>
     </div>
   </section>
 
@@ -19,7 +20,7 @@ import { zodiacSigns } from '../data/zodiac.js';
       <h2 class="section-title">Choose Your Sign</h2>
       <div class="zodiac-grid">
         {zodiacSigns.map(sign => (
-          <a href={`/horoscope/${sign.slug}/`} class="zodiac-card">
+          <a href={`${base}horoscope/${sign.slug}/`} class="zodiac-card">
             <span class="zodiac-symbol">{sign.symbol}</span>
             <span class="zodiac-name">{sign.name}</span>
             <span class="zodiac-dates">{sign.dates}</span>
@@ -36,7 +37,7 @@ import { zodiacSigns } from '../data/zodiac.js';
         <div class="video-placeholder">
           <div class="video-icon">▶</div>
           <p>Aries — Saturn &amp; Neptune Enter Your Sign</p>
-          <a href="/horoscope/aries/" class="btn btn-sm">Watch Reading →</a>
+          <a href={`${base}horoscope/aries/`} class="btn btn-sm">Watch Reading →</a>
         </div>
       </div>
     </div>
@@ -77,7 +78,6 @@ import { zodiacSigns } from '../data/zodiac.js';
   .hero-title { font-size: clamp(2.5rem, 6vw, 4.5rem); color: var(--color-primary); margin-bottom: 0.5rem; }
   .hero-tagline { font-size: 1.3rem; color: var(--color-accent); margin-bottom: 1rem; font-family: var(--font-heading); }
   .hero-desc { color: var(--color-text-muted); max-width: 500px; margin: 0 auto 2rem; }
-
   .btn {
     display: inline-block; padding: 0.75rem 2rem;
     background: linear-gradient(135deg, var(--color-accent), #b8943e);
@@ -87,10 +87,8 @@ import { zodiacSigns } from '../data/zodiac.js';
   }
   .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(201,169,110,0.3); color: #0a0a1a; }
   .btn-sm { padding: 0.5rem 1.5rem; font-size: 0.85rem; }
-
   .section { padding: 5rem 0; }
   .section-title { text-align: center; font-size: 2rem; color: var(--color-primary); margin-bottom: 2.5rem; }
-
   .zodiac-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; }
   .zodiac-card {
     display: flex; flex-direction: column; align-items: center; padding: 1.5rem 1rem;
@@ -101,7 +99,6 @@ import { zodiacSigns } from '../data/zodiac.js';
   .zodiac-symbol { font-size: 2.5rem; margin-bottom: 0.5rem; }
   .zodiac-name { font-family: var(--font-heading); font-size: 1.1rem; color: var(--color-text); }
   .zodiac-dates { font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.25rem; }
-
   .featured-video { max-width: 640px; margin: 0 auto; }
   .video-placeholder {
     background: var(--color-surface); border: 1px solid var(--color-border);
@@ -109,7 +106,6 @@ import { zodiacSigns } from '../data/zodiac.js';
   }
   .video-icon { font-size: 3rem; margin-bottom: 1rem; }
   .video-placeholder p { color: var(--color-text-muted); margin-bottom: 1.5rem; }
-
   .newsletter-section { text-align: center; }
   .newsletter-desc { color: var(--color-text-muted); margin-bottom: 2rem; }
   .newsletter-form { display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; }

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://celestial-tarot.pages.dev/sitemap-index.xml
